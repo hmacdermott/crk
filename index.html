@@ -691,12 +691,12 @@
             { name: "Camellia Cookie", rarity: "Super Epic", type: "Charge", elements: ["Grass"] },
             { name: "Elder Faerie Cookie", rarity: "Super Epic", type: "Defense", elements: ["Steel"] },
             { name: "Crimson Coral Cookie", rarity: "Super Epic", type: "Defense", elements: ["Water"] },
-            { name: "Shining Glitter Cookie", rarity: "Super Epic", type: "Magic", elements: ["Electricity"] },
+            { name: "Shining Glitter Cookie", rarity: "Super Epic", type: "Support", elements: ["Electricity"] },
             { name: "Capsaicin Cookie", rarity: "Super Epic", type: "Charge", elements: ["Fire"] },
-            { name: "Stardust Cookie", rarity: "Super Epic", type: "Ambush", elements: [] },
-            { name: "Sherbet Cookie", rarity: "Super Epic", type: "Ranged", elements: ["Ice"] },
+            { name: "Stardust Cookie", rarity: "Super Epic", type: "Support", elements: [] },
+            { name: "Sherbet Cookie", rarity: "Super Epic", type: "Support", elements: ["Ice"] },
             { name: "Oyster Cookie", rarity: "Super Epic", type: "Ranged", elements: [] },
-            { name: "Clotted Cream Cookie", rarity: "Super Epic", type: "Magic", elements: ["Light"] },
+            { name: "Clotted Cream Cookie", rarity: "Super Epic", type: "Support", elements: ["Light"] },
 
             // Dragon Cookies
             { name: "Pitaya Dragon Cookie", rarity: "Dragon", type: "Charge", elements: ["Fire"] },
@@ -1255,6 +1255,7 @@
                                             <div className="badge-group">
                                                 <span className="badge-group-label">Type:</span>
                                                 <span className="meta-badge type-position-badge">{cookie.type}</span>
+                                                <span className="meta-badge type-position-badge">{TYPE_POSITIONS[cookie.type]}</span>
                                             </div>
                                             <div className="badge-group">
                                                 <span className="badge-group-label">Elements:</span>
