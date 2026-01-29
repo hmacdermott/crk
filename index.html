@@ -548,6 +548,15 @@
 
         // Cookie data parsed from the guide
         const COOKIES_DATA = [
+            // Common Cookies
+            { name: "GingerBrave", rarity: "Common", type: "Charge", elements: [] },
+            { name: "Strawberry Cookie", rarity: "Common", type: "Defense", elements: [] },
+            { name: "Ninja Cookie", rarity: "Common", type: "Ambush", elements: [] },
+            { name: "Angel Cookie", rarity: "Common", type: "Healing", elements: [] },
+            { name: "Muscle Cookie", rarity: "Common", type: "Charge", elements: ["Steel"] },
+            { name: "Wizard Cookie", rarity: "Common", type: "Magic", elements: ["Electricity"] },
+            { name: "Beet Cookie", rarity: "Common", type: "Ranged", elements: [] },
+
             // Rare Cookies
             { name: "Adventurer Cookie", rarity: "Rare", type: "Ambush", elements: [] },
             { name: "Alchemist Cookie", rarity: "Rare", type: "Bomber", elements: ["Poison"] },
@@ -756,6 +765,15 @@
             // Convert cookie name to filename format matching downloaded files
             const getImageFileName = (name) => {
                 // Handle special cases first
+                if (name === "GingerBrave") {
+                    return "Gingerbrave_illustration.webp";
+                }
+                if (name === "Doughael") {
+                    return "Doughael_illustration.webp";
+                }
+                if (name === "Space Doughnut") {
+                    return "Space_doughnut_illustration.webp";
+                }
                 if (name === "Dark Enchantress Cookie") {
                     return "Dark_enchantress_illustration.webp";
                 }
