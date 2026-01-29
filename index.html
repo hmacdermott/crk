@@ -510,19 +510,259 @@
         }
 
         @media (max-width: 768px) {
-            .container { padding: 1rem; }
-            h1 { font-size: 2rem; }
-            header { padding-top: 4rem; margin-bottom: 2rem; }
+            .container { padding: 0.75rem; }
+            h1 { font-size: 1.75rem; }
+            header { padding-top: 3rem; margin-bottom: 1.5rem; }
+            .subtitle { font-size: 0.95rem; }
+
             .cookie-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
+
             .filter-row {
                 grid-template-columns: 1fr;
             }
+
+            .filter-chip {
+                padding: 0.65rem 1.1rem;
+                min-height: 44px;
+                font-size: 0.95rem;
+            }
+
+            .search-input {
+                font-size: 16px; /* Prevents iOS zoom on focus */
+                min-height: 44px;
+            }
+
+            .cookie-card {
+                padding: 1rem;
+            }
+
+            .section {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+
+            .section h2 {
+                font-size: 1.25rem;
+            }
+
+            .utility-buttons button {
+                min-height: 44px;
+                padding: 0.65rem 1rem;
+            }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] .modal-content {
+            background: #252320;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--color-slate);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: var(--color-navy);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header .cookie-image-container {
+            width: 80px;
+            height: 80px;
+        }
+
+        .modal-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--color-navy);
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section-title {
+            font-weight: 600;
+            color: var(--color-slate);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-section-content {
+            color: var(--color-navy);
+            font-size: 1rem;
+        }
+
+        /* Team Builder Styles */
+        .team-builder {
+            background: white;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 2px solid var(--color-border);
+        }
+
+        [data-theme="dark"] .team-builder {
+            background: #252320;
+        }
+
+        .team-builder-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--color-navy);
+            margin-bottom: 1rem;
+        }
+
+        .team-slots {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .team-slots {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .team-slot {
+            aspect-ratio: 1;
+            border: 3px dashed var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-cream);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        [data-theme="dark"] .team-slot {
+            background: #1a1917;
+        }
+
+        .team-slot:hover {
+            border-color: var(--color-amber);
+            transform: scale(1.05);
+        }
+
+        .team-slot.filled {
+            border-style: solid;
+            border-color: var(--color-success);
+        }
+
+        .team-slot-remove {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--color-warning);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team-slot-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .team-stat {
+            text-align: center;
+        }
+
+        .team-stat-label {
+            font-size: 0.85rem;
+            color: var(--color-slate);
+            margin-bottom: 0.25rem;
+        }
+
+        .team-stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-amber);
+        }
+
+        .cookie-card.selectable {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .cookie-card.selectable:hover {
+            border-color: var(--color-amber);
+            transform: translateY(-2px);
+        }
+
+        .cookie-card.in-team {
+            opacity: 0.6;
+            border-color: var(--color-success);
         }
 
         @media print {
-            .utility-buttons, .filters, .owned-checkbox {
+            .utility-buttons, .filters, .owned-checkbox, .team-builder {
                 display: none !important;
             }
         }
@@ -879,6 +1119,9 @@
             const [sortBy, setSortBy] = useState('name');
             const [showElementChart, setShowElementChart] = useState(false);
             const [showSynergies, setShowSynergies] = useState(false);
+            const [showTeamBuilder, setShowTeamBuilder] = useState(false);
+            const [selectedCookie, setSelectedCookie] = useState(null);
+            const [team, setTeam] = useState([]);
             const [ownedCookies, setOwnedCookies] = useState(() => {
                 const saved = localStorage.getItem('ownedCookies');
                 return saved ? JSON.parse(saved) : {};
@@ -937,6 +1180,44 @@
                 setSelectedRarity('All');
                 setShowOwnedOnly(false);
             };
+
+            // Team builder functions
+            const addToTeam = (cookie) => {
+                if (team.length < 5 && !team.find(c => c.name === cookie.name)) {
+                    setTeam([...team, cookie]);
+                }
+            };
+
+            const removeFromTeam = (cookieName) => {
+                setTeam(team.filter(c => c.name !== cookieName));
+            };
+
+            const clearTeam = () => {
+                setTeam([]);
+            };
+
+            // Cookie modal functions
+            const openCookieModal = (cookie, e) => {
+                if (e) e.stopPropagation();
+                setSelectedCookie(cookie);
+            };
+
+            const closeCookieModal = () => {
+                setSelectedCookie(null);
+            };
+
+            // Team statistics
+            const teamStats = useMemo(() => {
+                const types = {};
+                const elements = {};
+                team.forEach(cookie => {
+                    types[cookie.type] = (types[cookie.type] || 0) + 1;
+                    cookie.elements.forEach(el => {
+                        elements[el] = (elements[el] || 0) + 1;
+                    });
+                });
+                return { types, elements };
+            }, [team]);
 
             // Calculate element distribution
             const elementDistribution = useMemo(() => {
@@ -1156,10 +1437,72 @@
                                     >
                                         {showSynergies ? 'Hide' : 'Show'} Team Synergies
                                     </button>
+                                    <button
+                                        className="filter-chip"
+                                        onClick={() => setShowTeamBuilder(!showTeamBuilder)}
+                                    >
+                                        {showTeamBuilder ? 'Hide' : 'Show'} Team Builder
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    {showTeamBuilder && (
+                        <div className="team-builder">
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                                <h2 className="team-builder-title">Team Builder</h2>
+                                {team.length > 0 && (
+                                    <button className="filter-chip" onClick={clearTeam}>Clear Team</button>
+                                )}
+                            </div>
+                            <p style={{ color: 'var(--color-slate)', marginBottom: '1rem', fontSize: '0.95rem' }}>
+                                Click cookies below to add them to your team (max 5)
+                            </p>
+                            <div className="team-slots">
+                                {[0, 1, 2, 3, 4].map(index => (
+                                    <div key={index} className={`team-slot ${team[index] ? 'filled' : ''}`}>
+                                        {team[index] ? (
+                                            <>
+                                                <CookieImage cookieName={team[index].name} />
+                                                <button
+                                                    className="team-slot-remove"
+                                                    onClick={() => removeFromTeam(team[index].name)}
+                                                    title="Remove from team"
+                                                >
+                                                    ×
+                                                </button>
+                                            </>
+                                        ) : (
+                                            <span style={{ fontSize: '2rem', color: 'var(--color-slate)' }}>+</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                            {team.length > 0 && (
+                                <div className="team-stats">
+                                    <div className="team-stat">
+                                        <div className="team-stat-label">Team Size</div>
+                                        <div className="team-stat-value">{team.length}/5</div>
+                                    </div>
+                                    <div className="team-stat">
+                                        <div className="team-stat-label">Elements</div>
+                                        <div className="team-stat-value">{Object.keys(teamStats.elements).length || 0}</div>
+                                    </div>
+                                    <div className="team-stat">
+                                        <div className="team-stat-label">Types</div>
+                                        <div className="team-stat-value">
+                                            {Object.entries(teamStats.types).map(([type, count]) => (
+                                                <div key={type} style={{ fontSize: '0.75rem', fontWeight: '400', color: 'var(--color-slate)' }}>
+                                                    {type}: {count}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
 
                     {showElementChart && (
                         <div className="section">
@@ -1226,10 +1569,19 @@
                         <div className="cookie-grid">
                             {filteredCookies.map(cookie => {
                                 const statInfo = STAT_PRIORITIES[cookie.type];
+                                const inTeam = team.find(c => c.name === cookie.name);
                                 return (
                                     <div
                                         key={cookie.name}
-                                        className={`cookie-card ${ownedCookies[cookie.name] ? 'owned' : ''}`}
+                                        className={`cookie-card ${ownedCookies[cookie.name] ? 'owned' : ''} ${showTeamBuilder ? 'selectable' : ''} ${inTeam ? 'in-team' : ''}`}
+                                        onClick={showTeamBuilder ? (e) => {
+                                            e.stopPropagation();
+                                            if (inTeam) {
+                                                removeFromTeam(cookie.name);
+                                            } else {
+                                                addToTeam(cookie);
+                                            }
+                                        } : (e) => openCookieModal(cookie, e)}
                                     >
                                         <div className="cookie-header">
                                             <div className="cookie-image-container">
@@ -1294,6 +1646,89 @@
                     <div className="footer">
                         <p>Cookie Run: Kingdom Reference Guide • Data updated January 29, 2026</p>
                     </div>
+
+                    {selectedCookie && (
+                        <div className="modal-overlay" onClick={closeCookieModal}>
+                            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                                <button className="modal-close" onClick={closeCookieModal}>×</button>
+
+                                <div className="modal-header">
+                                    <div className="cookie-image-container">
+                                        <CookieImage cookieName={selectedCookie.name} />
+                                    </div>
+                                    <div>
+                                        <h2 className="modal-title">{selectedCookie.name}</h2>
+                                        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
+                                            <span className="meta-badge type-position-badge">{selectedCookie.rarity}</span>
+                                            <span className="meta-badge type-position-badge">{selectedCookie.type}</span>
+                                            <span className="meta-badge type-position-badge">{TYPE_POSITIONS[selectedCookie.type]}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="modal-section">
+                                    <div className="modal-section-title">Elements</div>
+                                    <div className="modal-section-content">
+                                        {selectedCookie.elements.length === 0 ? (
+                                            <span className="meta-badge element-badge">None</span>
+                                        ) : (
+                                            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                                {selectedCookie.elements.map(element => (
+                                                    <span key={element} className="meta-badge element-badge">{element}</span>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="modal-section">
+                                    <div className="modal-section-title">Stat Priority</div>
+                                    <div className="modal-section-content">
+                                        {STAT_PRIORITIES[selectedCookie.type]?.stats}
+                                    </div>
+                                </div>
+
+                                <div className="modal-section">
+                                    <div className="modal-section-title">Recommended Toppings</div>
+                                    <div className="modal-section-content">
+                                        {STAT_PRIORITIES[selectedCookie.type]?.toppings}
+                                    </div>
+                                </div>
+
+                                <div className="modal-section">
+                                    <div className="modal-section-title">Recommended Beascuit</div>
+                                    <div className="modal-section-content">
+                                        {getBeascuitRecommendation(selectedCookie.type, selectedCookie.elements)}
+                                    </div>
+                                </div>
+
+                                <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
+                                    <button
+                                        className="filter-chip"
+                                        style={{ flex: 1 }}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggleOwned(selectedCookie.name, e);
+                                        }}
+                                    >
+                                        {ownedCookies[selectedCookie.name] ? '✓ Owned' : 'Mark as Owned'}
+                                    </button>
+                                    {team.length < 5 && !team.find(c => c.name === selectedCookie.name) && (
+                                        <button
+                                            className="filter-chip"
+                                            style={{ flex: 1, background: 'var(--color-success)', borderColor: 'var(--color-success)', color: 'white' }}
+                                            onClick={() => {
+                                                addToTeam(selectedCookie);
+                                                closeCookieModal();
+                                            }}
+                                        >
+                                            Add to Team
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             );
         }
