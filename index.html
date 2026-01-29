@@ -230,11 +230,10 @@
         }
 
         .cookie-image-container {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             flex-shrink: 0;
-            border-radius: 12px;
-            overflow: hidden;
+            position: relative;
             background: var(--color-cream);
             border: 2px solid var(--color-border);
         }
@@ -257,6 +256,25 @@
             font-size: 1.8rem;
             color: white;
             background: linear-gradient(135deg, var(--color-amber) 0%, var(--color-sage) 100%);
+        }
+
+        .cookie-icons {
+            position: absolute;
+            bottom: 2px;
+            left: 2px;
+            right: 2px;
+            display: flex;
+            gap: 2px;
+            justify-content: center;
+        }
+
+        .type-icon,
+        .position-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--color-border);
         }
 
         .cookie-info {
@@ -288,9 +306,25 @@
 
         .cookie-meta {
             display: flex;
-            gap: 0.5rem;
+            flex-direction: column;
+            gap: 0.75rem;
             margin-bottom: 1rem;
+        }
+
+        .badge-group {
+            display: flex;
+            gap: 0.5rem;
             flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .badge-group-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-slate);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 60px;
         }
 
         .meta-badge {
@@ -300,24 +334,28 @@
             font-weight: 600;
         }
 
-        .type-badge {
+        .type-position-badge {
             background: #e0f2fe;
             color: #0369a1;
+            border: 1px solid #7dd3fc;
         }
 
-        [data-theme="dark"] .type-badge {
+        [data-theme="dark"] .type-position-badge {
             background: #0c4a6e;
             color: #7dd3fc;
+            border-color: #0c4a6e;
         }
 
         .element-badge {
             background: #fef3c7;
             color: #92400e;
+            border: 1px solid #fcd34d;
         }
 
         [data-theme="dark"] .element-badge {
             background: #78350f;
             color: #fde68a;
+            border-color: #78350f;
         }
 
         .cookie-stats {
@@ -594,9 +632,23 @@
             "Support": { stats: "Cooldown > DMG Resist > ATK > HP", toppings: "5x Swift Chocolate (CD >20%)" },
         };
 
+        // Position mapping by type
+        const TYPE_POSITIONS = {
+            "Charge": "Front",
+            "Defense": "Front",
+            "Ambush": "Rear",
+            "Bomber": "Rear",
+            "Magic": "Rear",
+            "Ranged": "Rear",
+            "Support": "Middle",
+            "Healing": "Middle"
+        };
+
         // Cookie Image Component with fallback
-        function CookieImage({ cookieName }) {
+        function CookieImage({ cookieName, cookieType }) {
             const [imageError, setImageError] = useState(false);
+            const [typeIconError, setTypeIconError] = useState(false);
+            const [positionIconError, setPositionIconError] = useState(false);
 
             // Convert cookie name to filename format matching downloaded files
             const getImageFileName = (name) => {
@@ -646,21 +698,43 @@
                 return words.slice(0, 2).map(w => w[0]).join('').toUpperCase();
             };
 
-            if (imageError) {
-                return (
-                    <div className="cookie-image-placeholder">
-                        {getInitials(cookieName)}
-                    </div>
-                );
-            }
+            const position = TYPE_POSITIONS[cookieType];
 
             return (
-                <img
-                    src={imagePath}
-                    alt={cookieName}
-                    className="cookie-image"
-                    onError={() => setImageError(true)}
-                />
+                <>
+                    {imageError ? (
+                        <div className="cookie-image-placeholder">
+                            {getInitials(cookieName)}
+                        </div>
+                    ) : (
+                        <img
+                            src={imagePath}
+                            alt={cookieName}
+                            className="cookie-image"
+                            onError={() => setImageError(true)}
+                        />
+                    )}
+                    <div className="cookie-icons">
+                        {!typeIconError && (
+                            <img
+                                src={`images/${cookieType}.webp`}
+                                alt={cookieType}
+                                className="type-icon"
+                                title={cookieType}
+                                onError={() => setTypeIconError(true)}
+                            />
+                        )}
+                        {!positionIconError && (
+                            <img
+                                src={`images/${position}.webp`}
+                                alt={position}
+                                className="position-icon"
+                                title={position}
+                                onError={() => setPositionIconError(true)}
+                            />
+                        )}
+                    </div>
+                </>
             );
         }
 
@@ -814,7 +888,7 @@
                                     >
                                         <div className="cookie-header">
                                             <div className="cookie-image-container">
-                                                <CookieImage cookieName={cookie.name} />
+                                                <CookieImage cookieName={cookie.name} cookieType={cookie.type} />
                                             </div>
                                             <div className="cookie-info">
                                                 <div className="cookie-name">{cookie.name}</div>
@@ -830,14 +904,21 @@
                                         </div>
 
                                         <div className="cookie-meta">
-                                            <span className="meta-badge type-badge">{cookie.type}</span>
-                                            {cookie.elements.length === 0 ? (
-                                                <span className="meta-badge element-badge">No Element</span>
-                                            ) : (
-                                                cookie.elements.map(element => (
-                                                    <span key={element} className="meta-badge element-badge">{element}</span>
-                                                ))
-                                            )}
+                                            <div className="badge-group">
+                                                <span className="badge-group-label">Type:</span>
+                                                <span className="meta-badge type-position-badge">{cookie.type}</span>
+                                                <span className="meta-badge type-position-badge">{TYPE_POSITIONS[cookie.type]}</span>
+                                            </div>
+                                            <div className="badge-group">
+                                                <span className="badge-group-label">Elements:</span>
+                                                {cookie.elements.length === 0 ? (
+                                                    <span className="meta-badge element-badge">None</span>
+                                                ) : (
+                                                    cookie.elements.map(element => (
+                                                        <span key={element} className="meta-badge element-badge">{element}</span>
+                                                    ))
+                                                )}
+                                            </div>
                                         </div>
 
                                         <div className="cookie-stats">
