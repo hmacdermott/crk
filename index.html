@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Run: Kingdom Reference Guide</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-navy: #1a2332;
+            --color-slate: #475569;
+            --color-sage: #6b7c6e;
+            --color-cream: #faf8f5;
+            --color-amber: #d4a574;
+            --color-warning: #c05621;
+            --color-border: #e0ddd8;
+            --color-success: #10b981;
+            --font-serif: 'Crimson Pro', serif;
+            --font-sans: 'DM Sans', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --color-navy: #e8e6e3;
+            --color-slate: #a8a29e;
+            --color-sage: #a8b4a9;
+            --color-cream: #1a1917;
+            --color-amber: #d4a574;
+            --color-warning: #f59e0b;
+            --color-border: #3a3734;
+            --color-success: #10b981;
+        }
+
+        [data-theme="dark"] body {
+            background: linear-gradient(135deg, #1a1917 0%, #252320 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-sans);
+            background: linear-gradient(135deg, var(--color-cream) 0%, #ffffff 100%);
+            color: var(--color-navy);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 3rem;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--color-navy);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--color-slate);
+            font-weight: 400;
+        }
+
+        /* Utility Buttons */
+        .utility-buttons {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 1000;
+        }
+
+        .utility-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-amber);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .utility-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Filters Section */
+        .filters {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] .filters {
+            background: #252320;
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: var(--color-navy);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: var(--font-sans);
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-amber);
+        }
+
+        [data-theme="dark"] .search-input {
+            background: #1a1917;
+            color: var(--color-navy);
+            border-color: var(--color-border);
+        }
+
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-chip {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--color-border);
+            border-radius: 20px;
+            background: transparent;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            color: var(--color-slate);
+        }
+
+        .filter-chip:hover {
+            border-color: var(--color-amber);
+            color: var(--color-navy);
+        }
+
+        .filter-chip.active {
+            background: var(--color-amber);
+            border-color: var(--color-amber);
+            color: white;
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Cookie Grid */
+        .cookie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cookie-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .cookie-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .cookie-card.owned {
+            border-color: var(--color-success);
+        }
+
+        [data-theme="dark"] .cookie-card {
+            background: #252320;
+        }
+
+        .cookie-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .cookie-image-container {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--color-cream);
+            border: 2px solid var(--color-border);
+        }
+
+        .cookie-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .cookie-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: white;
+            background: linear-gradient(135deg, var(--color-amber) 0%, var(--color-sage) 100%);
+        }
+
+        .cookie-info {
+            flex: 1;
+        }
+
+        .cookie-name {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 0.25rem;
+        }
+
+        .cookie-rarity {
+            font-size: 0.8rem;
+            color: var(--color-slate);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .owned-checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            accent-color: var(--color-success);
+        }
+
+        .cookie-meta {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .type-badge {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        [data-theme="dark"] .type-badge {
+            background: #0c4a6e;
+            color: #7dd3fc;
+        }
+
+        .element-badge {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        [data-theme="dark"] .element-badge {
+            background: #78350f;
+            color: #fde68a;
+        }
+
+        .cookie-stats {
+            margin-bottom: 1rem;
+        }
+
+        .stats-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-slate);
+            margin-bottom: 0.25rem;
+        }
+
+        .stats-value {
+            font-size: 0.9rem;
+            color: var(--color-navy);
+        }
+
+        .topping-recommendation {
+            padding: 0.75rem;
+            background: var(--color-cream);
+            border-radius: 8px;
+            border-left: 4px solid var(--color-amber);
+        }
+
+        [data-theme="dark"] .topping-recommendation {
+            background: #1a1917;
+        }
+
+        .topping-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-slate);
+            margin-bottom: 0.25rem;
+        }
+
+        .topping-value {
+            font-size: 0.9rem;
+            color: var(--color-navy);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--color-slate);
+            font-size: 1.1rem;
+        }
+
+        .results-count {
+            margin-bottom: 1rem;
+            color: var(--color-slate);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem 0;
+            color: var(--color-slate);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            h1 { font-size: 2rem; }
+            header { padding-top: 4rem; margin-bottom: 2rem; }
+            .cookie-grid {
+                grid-template-columns: 1fr;
+            }
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            .utility-buttons, .filters, .owned-checkbox {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="utility-buttons">
+        <button class="utility-btn" id="shareBtn" aria-label="Share" title="Share">
+            🔗
+        </button>
+        <button class="utility-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">
+            🌙
+        </button>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useMemo } = React;
+
+        // Cookie data parsed from the guide
+        const COOKIES_DATA = [
+            // Epic Cookies
+            { name: "Affogato Cookie", rarity: "Epic", type: "Bomber", elements: ["Poison"] },
+            { name: "Agar Agar Cookie", rarity: "Epic", type: "Ambush", elements: ["Water", "Fire", "Ice", "Electricity", "Wind"] },
+            { name: "Almond Cookie", rarity: "Epic", type: "Support", elements: ["Earth"] },
+            { name: "Black Forest Cookie", rarity: "Epic", type: "Charge", elements: [] },
+            { name: "Black Lemonade Cookie", rarity: "Epic", type: "Bomber", elements: ["Electricity"] },
+            { name: "Black Raisin Cookie", rarity: "Epic", type: "Ambush", elements: ["Darkness"] },
+            { name: "Black Sapphire Cookie", rarity: "Epic", type: "Support", elements: ["Poison"] },
+            { name: "Blueberry Pie Cookie", rarity: "Epic", type: "Magic", elements: ["Electricity"] },
+            { name: "Burnt Cheese Cookie", rarity: "Epic", type: "Charge", elements: ["Earth"] },
+            { name: "Butter Roll Cookie", rarity: "Epic", type: "Charge", elements: ["Steel", "Chaos"] },
+            { name: "Camellia Cookie", rarity: "Epic", type: "Charge", elements: ["Grass"] },
+            { name: "Candy Apple Cookie", rarity: "Epic", type: "Bomber", elements: [] },
+            { name: "Candy Diver Cookie", rarity: "Epic", type: "Support", elements: [] },
+            { name: "Captain Caviar Cookie", rarity: "Epic", type: "Bomber", elements: ["Water"] },
+            { name: "Capsaicin Cookie", rarity: "Epic", type: "Charge", elements: ["Fire"] },
+            { name: "Caramel Arrow Cookie", rarity: "Epic", type: "Ranged", elements: ["Darkness"] },
+            { name: "Caramel Choux Cookie", rarity: "Epic", type: "Support", elements: [] },
+            { name: "Carol Cookie", rarity: "Epic", type: "Healing", elements: ["Grass"] },
+            { name: "Charcoal Cookie", rarity: "Epic", type: "Magic", elements: ["Darkness"] },
+            { name: "Cherry Blossom Cookie", rarity: "Epic", type: "Ambush", elements: ["Grass"] },
+            { name: "Chess Choco Cookie", rarity: "Epic", type: "Bomber", elements: ["Chaos"] },
+            { name: "Chili Pepper Cookie", rarity: "Epic", type: "Ambush", elements: ["Fire"] },
+            { name: "Choco Drizzle Cookie", rarity: "Epic", type: "Ambush", elements: ["Darkness"] },
+            { name: "Clotted Cream Cookie", rarity: "Epic", type: "Magic", elements: ["Light"] },
+            { name: "Cloud Haetae Cookie", rarity: "Epic", type: "Defense", elements: [] },
+            { name: "Cocoa Cookie", rarity: "Epic", type: "Defense", elements: [] },
+            { name: "Cotton Cookie", rarity: "Epic", type: "Support", elements: ["Grass"] },
+            { name: "Cream Puff Cookie", rarity: "Epic", type: "Support", elements: ["Light"] },
+            { name: "Cream Soda Cookie", rarity: "Epic", type: "Charge", elements: ["Water"] },
+            { name: "Cream Unicorn Cookie", rarity: "Epic", type: "Healing", elements: ["Fire"] },
+            { name: "Crème Brûlée Cookie", rarity: "Epic", type: "Ranged", elements: ["Light"] },
+            { name: "Crunchy Chip Cookie", rarity: "Epic", type: "Charge", elements: ["Darkness"] },
+            { name: "Dark Choco Cookie", rarity: "Epic", type: "Charge", elements: ["Darkness"] },
+            { name: "Eclair Cookie", rarity: "Epic", type: "Support", elements: [] },
+            { name: "Elphaba Cookie", rarity: "Epic", type: "Magic", elements: [] },
+            { name: "Espresso Cookie", rarity: "Epic", type: "Magic", elements: ["Earth"] },
+            { name: "Fettuccine Cookie", rarity: "Epic", type: "Defense", elements: ["Earth"] },
+            { name: "Fig Cookie", rarity: "Epic", type: "Support", elements: ["Grass"] },
+            { name: "Financier Cookie", rarity: "Epic", type: "Defense", elements: ["Light"] },
+            { name: "Frilled Jellyfish Cookie", rarity: "Epic", type: "Support", elements: ["Water", "Electricity"] },
+            { name: "Glinda Cookie", rarity: "Epic", type: "Magic", elements: [] },
+            { name: "Golden Osmanthus Cookie", rarity: "Epic", type: "Bomber", elements: ["Grass"] },
+            { name: "Grapefruit Cookie", rarity: "Epic", type: "Charge", elements: ["Electricity"] },
+            { name: "Green Tea Mousse Cookie", rarity: "Epic", type: "Defense", elements: ["Wind", "Grass"] },
+            { name: "Herb Cookie", rarity: "Epic", type: "Healing", elements: [] },
+            { name: "Jagae Cookie", rarity: "Epic", type: "Support", elements: ["Water"] },
+            { name: "Kouign-Amann Cookie", rarity: "Epic", type: "Defense", elements: ["Light"] },
+            { name: "Kumiho Cookie", rarity: "Epic", type: "Charge", elements: ["Wind"] },
+            { name: "Latte Cookie", rarity: "Epic", type: "Magic", elements: ["Earth"] },
+            { name: "Lemon Cookie", rarity: "Epic", type: "Ambush", elements: ["Electricity"] },
+            { name: "Lilac Cookie", rarity: "Epic", type: "Support", elements: ["Grass"] },
+            { name: "Lime Cookie", rarity: "Epic", type: "Support", elements: [] },
+            { name: "Linzer Cookie", rarity: "Epic", type: "Support", elements: [] },
+            { name: "Licorice Cookie", rarity: "Epic", type: "Magic", elements: ["Darkness", "Poison", "Chaos"] },
+            { name: "Macaron Cookie", rarity: "Epic", type: "Magic", elements: [] },
+            { name: "Madeleine Cookie", rarity: "Epic", type: "Defense", elements: ["Light"] },
+            { name: "Mala Sauce Cookie", rarity: "Epic", type: "Charge", elements: ["Fire"] },
+            { name: "Mango Cookie", rarity: "Epic", type: "Magic", elements: ["Water"] },
+            { name: "Manju Cookie", rarity: "Epic", type: "Ambush", elements: ["Water"] },
+            { name: "Matcha Cookie", rarity: "Epic", type: "Magic", elements: ["Poison", "Grass"] },
+            { name: "Menthol Cookie", rarity: "Epic", type: "Bomber", elements: ["Water"] },
+            { name: "Mercurial Knight Cookie", rarity: "Epic", type: "Charge", elements: ["Steel"] },
+            { name: "Milk Cookie", rarity: "Epic", type: "Defense", elements: [] },
+            { name: "Milky Way Cookie", rarity: "Epic", type: "Charge", elements: [] },
+            { name: "Mint Choco Cookie", rarity: "Epic", type: "Support", elements: ["Wind"] },
+            { name: "Mold Dough Cookie", rarity: "Epic", type: "Charge", elements: ["Chaos"] },
+            { name: "Moon Rabbit Cookie", rarity: "Epic", type: "Defense", elements: [] },
+            { name: "Mozzarella Cookie", rarity: "Epic", type: "Magic", elements: ["Earth"] },
+            { name: "Nutmeg Tiger Cookie", rarity: "Epic", type: "Support", elements: ["Fire"] },
+            { name: "Okchun Cookie", rarity: "Epic", type: "Healing", elements: [] },
+            { name: "Olive Cookie", rarity: "Epic", type: "Support", elements: ["Fire", "Earth", "Electricity"] },
+            { name: "Orange Cookie", rarity: "Epic", type: "Magic", elements: ["Electricity"] },
+            { name: "Parfait Cookie", rarity: "Epic", type: "Support", elements: [] },
+            { name: "Pastry Cookie", rarity: "Epic", type: "Ranged", elements: ["Wind"] },
+            { name: "Pavlova Cookie", rarity: "Epic", type: "Ranged", elements: [] },
+            { name: "Peach Blossom Cookie", rarity: "Epic", type: "Support", elements: [] },
+            { name: "Peppermint Cookie", rarity: "Epic", type: "Support", elements: ["Water"] },
+            { name: "Pinecone Cookie", rarity: "Epic", type: "Bomber", elements: ["Ice"] },
+            { name: "Poison Mushroom Cookie", rarity: "Epic", type: "Bomber", elements: ["Poison"] },
+            { name: "Pomegranate Cookie", rarity: "Epic", type: "Support", elements: [] },
+            { name: "Prophet Cookie", rarity: "Epic", type: "Support", elements: [] },
+            { name: "Prune Juice Cookie", rarity: "Epic", type: "Bomber", elements: ["Poison"] },
+            { name: "Pudding à la Mode Cookie", rarity: "Epic", type: "Bomber", elements: ["Electricity"] },
+            { name: "Pumpkin Pie Cookie", rarity: "Epic", type: "Magic", elements: ["Darkness"] },
+            { name: "Purple Yam Cookie", rarity: "Epic", type: "Charge", elements: ["Grass"] },
+            { name: "Raspberry Cookie", rarity: "Epic", type: "Charge", elements: ["Steel"] },
+            { name: "Rebel Cookie", rarity: "Epic", type: "Ambush", elements: ["Wind"] },
+            { name: "Red Osmanthus Cookie", rarity: "Epic", type: "Ranged", elements: ["Grass"] },
+            { name: "Red Velvet Cookie", rarity: "Epic", type: "Charge", elements: ["Darkness"] },
+            { name: "Rockstar Cookie", rarity: "Epic", type: "Healing", elements: [] },
+            { name: "Royal Margarine Cookie", rarity: "Epic", type: "Ambush", elements: ["Poison"] },
+            { name: "Rye Cookie", rarity: "Epic", type: "Ranged", elements: ["Fire"] },
+            { name: "Salt Cellar Cookie", rarity: "Epic", type: "Defense", elements: ["Steel"] },
+            { name: "Schwarzwälder", rarity: "Epic", type: "Charge", elements: ["Steel", "Chaos"] },
+            { name: "Seltzer Cookie", rarity: "Epic", type: "Support", elements: ["Water"] },
+            { name: "Shining Glitter Cookie", rarity: "Epic", type: "Magic", elements: ["Electricity"] },
+            { name: "Silverbell Cookie", rarity: "Epic", type: "Support", elements: ["Grass"] },
+            { name: "Smoked Cheese Cookie", rarity: "Epic", type: "Magic", elements: ["Earth"] },
+            { name: "Snow Sugar Cookie", rarity: "Epic", type: "Magic", elements: ["Ice"] },
+            { name: "Sorbet Shark Cookie", rarity: "Epic", type: "Ambush", elements: ["Water"] },
+            { name: "Space Doughnut", rarity: "Epic", type: "Charge", elements: [] },
+            { name: "Sparkling Cookie", rarity: "Epic", type: "Healing", elements: ["Light"] },
+            { name: "Squid Ink Cookie", rarity: "Epic", type: "Magic", elements: ["Water"] },
+            { name: "Star Coral Cookie", rarity: "Epic", type: "Support", elements: [] },
+            { name: "Strawberry Crepe Cookie", rarity: "Epic", type: "Defense", elements: [] },
+            { name: "Street Urchin Cookie", rarity: "Epic", type: "Bomber", elements: ["Fire"] },
+            { name: "Sugarfly Cookie", rarity: "Epic", type: "Support", elements: [] },
+            { name: "Tarte Tatin Cookie", rarity: "Epic", type: "Ranged", elements: ["Fire"] },
+            { name: "Tea Knight Cookie", rarity: "Epic", type: "Charge", elements: ["Steel"] },
+            { name: "Tiger Lily Cookie", rarity: "Epic", type: "Ranged", elements: [] },
+            { name: "Twizzly Gummy Cookie", rarity: "Epic", type: "Ranged", elements: ["Electricity"] },
+            { name: "Vampire Cookie", rarity: "Epic", type: "Ambush", elements: [] },
+            { name: "Wedding Cake Cookie", rarity: "Epic", type: "Magic", elements: [] },
+            { name: "Werewolf Cookie", rarity: "Epic", type: "Charge", elements: ["Steel"] },
+            { name: "Wildberry Cookie", rarity: "Epic", type: "Defense", elements: ["Steel"] },
+
+            // Super Epic Cookies
+            { name: "Doughael", rarity: "Super Epic", type: "Healing", elements: [] },
+            { name: "Camellia Cookie", rarity: "Super Epic", type: "Charge", elements: ["Grass"] },
+            { name: "Elder Faerie Cookie", rarity: "Super Epic", type: "Defense", elements: ["Steel"] },
+            { name: "Crimson Coral Cookie", rarity: "Super Epic", type: "Defense", elements: ["Water"] },
+            { name: "Shining Glitter Cookie", rarity: "Super Epic", type: "Magic", elements: ["Electricity"] },
+            { name: "Capsaicin Cookie", rarity: "Super Epic", type: "Charge", elements: ["Fire"] },
+            { name: "Stardust Cookie", rarity: "Super Epic", type: "Ambush", elements: [] },
+            { name: "Sherbet Cookie", rarity: "Super Epic", type: "Ranged", elements: ["Ice"] },
+            { name: "Oyster Cookie", rarity: "Super Epic", type: "Support", elements: [] },
+            { name: "Clotted Cream Cookie", rarity: "Super Epic", type: "Magic", elements: ["Light"] },
+
+            // Dragon Cookies
+            { name: "Pitaya Dragon Cookie", rarity: "Dragon", type: "Charge", elements: ["Fire"] },
+
+            // Legendary Cookies
+            { name: "Fire Spirit Cookie", rarity: "Legendary", type: "Magic", elements: ["Fire"] },
+            { name: "Wind Archer Cookie", rarity: "Legendary", type: "Ranged", elements: ["Wind"] },
+            { name: "Stormbringer Cookie", rarity: "Legendary", type: "Charge", elements: ["Electricity"] },
+            { name: "Moonlight Cookie", rarity: "Legendary", type: "Magic", elements: [] },
+            { name: "Black Pearl Cookie", rarity: "Legendary", type: "Ambush", elements: ["Water"] },
+            { name: "Frost Queen Cookie", rarity: "Legendary", type: "Magic", elements: ["Ice"] },
+            { name: "Sea Fairy Cookie", rarity: "Legendary", type: "Bomber", elements: ["Water"] },
+            { name: "Millennial Tree Cookie", rarity: "Legendary", type: "Support", elements: ["Grass"] },
+            { name: "Dark Enchantress Cookie", rarity: "Legendary", type: "Magic", elements: ["Chaos"] },
+
+            // Ancient Cookies
+            { name: "Pure Vanilla Cookie", rarity: "Ancient", type: "Healing", elements: [] },
+            { name: "Hollyberry Cookie", rarity: "Ancient", type: "Defense", elements: ["Steel"] },
+            { name: "Dark Cacao Cookie", rarity: "Ancient", type: "Charge", elements: ["Darkness", "Electricity"] },
+            { name: "Golden Cheese Cookie", rarity: "Ancient", type: "Ranged", elements: ["Earth"] },
+            { name: "White Lily Cookie", rarity: "Ancient", type: "Bomber", elements: ["Grass"] },
+
+            // Awakened Ancient Cookies
+            { name: "Dark Cacao Cookie (Dragon Lord)", rarity: "Awakened Ancient", type: "Charge", elements: ["Darkness", "Electricity"] },
+            { name: "Golden Cheese Cookie (Immortal)", rarity: "Awakened Ancient", type: "Ranged", elements: ["Earth"] },
+            { name: "Pure Vanilla Cookie (Compassionate)", rarity: "Awakened Ancient", type: "Healing", elements: ["Light"] },
+            { name: "Hollyberry Cookie (Aegis)", rarity: "Awakened Ancient", type: "Defense", elements: ["Steel"] },
+            { name: "White Lily Cookie (Dawnbringer)", rarity: "Awakened Ancient", type: "Bomber", elements: ["Grass"] },
+
+            // Beast Cookies
+            { name: "Mystic Flour Cookie", rarity: "Beast", type: "Healing", elements: [] },
+            { name: "Burning Spice Cookie", rarity: "Beast", type: "Charge", elements: ["Fire"] },
+            { name: "Shadow Milk Cookie", rarity: "Beast", type: "Magic", elements: [] },
+            { name: "Eternal Sugar Cookie", rarity: "Beast", type: "Bomber", elements: [] },
+            { name: "Silent Salt Cookie", rarity: "Beast", type: "Ambush", elements: ["Darkness", "Steel"] },
+        ];
+
+        // Stat priorities by type
+        const STAT_PRIORITIES = {
+            "Ambush": { stats: "ATK > CRIT% > Cooldown > DMG Resist", toppings: "5x Searing Raspberry (ATK)" },
+            "Bomber": { stats: "ATK > Cooldown > DMG Resist > ATK SPD", toppings: "5x Searing Raspberry or Swift Chocolate mix" },
+            "Charge": { stats: "DMG Resist > HP > ATK > Cooldown", toppings: "5x Solid Almond (DMG Resist 40%+)" },
+            "Defense": { stats: "DMG Resist > HP > Cooldown > DEF", toppings: "5x Solid Almond (DMG Resist 40%+)" },
+            "Healing": { stats: "Cooldown > DMG Resist > ATK > HP", toppings: "5x Swift Chocolate (CD >20%)" },
+            "Magic": { stats: "ATK > Cooldown > DMG Resist > CRIT%", toppings: "5x Searing Raspberry or Swift Chocolate" },
+            "Ranged": { stats: "ATK > CRIT% > Cooldown > DMG Resist", toppings: "5x Searing Raspberry" },
+            "Support": { stats: "Cooldown > DMG Resist > ATK > HP", toppings: "5x Swift Chocolate (CD >20%)" },
+        };
+
+        // Cookie Image Component with fallback
+        function CookieImage({ cookieName }) {
+            const [imageError, setImageError] = useState(false);
+
+            // Convert cookie name to filename format matching downloaded files
+            const getImageFileName = (name) => {
+                // Handle special cases first
+                if (name === "Dark Enchantress Cookie") {
+                    return "Dark-enchantress-cookie.webp";
+                }
+                if (name === "Millennial Tree Cookie") {
+                    return "Millennial-tree-cookie.webp";
+                }
+
+                // Handle Awakened Ancient cookies
+                if (name.includes("(Dragon Lord)")) {
+                    return "Awakened_dark_cacao_illustration.webp";
+                }
+                if (name.includes("(Immortal)")) {
+                    return "Awakened_golden_cheese_illustration.webp";
+                }
+                if (name.includes("(Compassionate)")) {
+                    return "Awakened_pure_vanilla_illustration.webp";
+                }
+                if (name.includes("(Aegis)")) {
+                    return "Awakened_hollyberry_illustration.webp";
+                }
+                if (name.includes("(Dawnbringer)")) {
+                    return "Awakened_white_lily_illustration.webp";
+                }
+
+                // Standard format: First_word_second_word_illustration.webp
+                // Remove " Cookie" from the end and convert
+                let baseName = name.replace(" Cookie", "");
+                // Replace spaces with underscores and capitalize each word
+                baseName = baseName.split(' ')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                    .join('_');
+
+                return `${baseName}_illustration.webp`;
+            };
+
+            const imageFileName = getImageFileName(cookieName);
+            const imagePath = `images/${imageFileName}`;
+
+            // Get initials for placeholder
+            const getInitials = (name) => {
+                const words = name.split(' ');
+                if (words.length === 1) return name.substring(0, 2).toUpperCase();
+                return words.slice(0, 2).map(w => w[0]).join('').toUpperCase();
+            };
+
+            if (imageError) {
+                return (
+                    <div className="cookie-image-placeholder">
+                        {getInitials(cookieName)}
+                    </div>
+                );
+            }
+
+            return (
+                <img
+                    src={imagePath}
+                    alt={cookieName}
+                    className="cookie-image"
+                    onError={() => setImageError(true)}
+                />
+            );
+        }
+
+        function App() {
+            const [searchTerm, setSearchTerm] = useState('');
+            const [selectedType, setSelectedType] = useState('All');
+            const [selectedElement, setSelectedElement] = useState('All');
+            const [selectedRarity, setSelectedRarity] = useState('All');
+            const [showOwnedOnly, setShowOwnedOnly] = useState(false);
+            const [ownedCookies, setOwnedCookies] = useState(() => {
+                const saved = localStorage.getItem('ownedCookies');
+                return saved ? JSON.parse(saved) : {};
+            });
+
+            // Save owned cookies to localStorage
+            useEffect(() => {
+                localStorage.setItem('ownedCookies', JSON.stringify(ownedCookies));
+            }, [ownedCookies]);
+
+            // Get unique values for filters
+            const types = ['All', ...new Set(COOKIES_DATA.map(c => c.type))].sort();
+            const elements = ['All', 'None', ...new Set(COOKIES_DATA.flatMap(c => c.elements))].sort();
+            const rarities = ['All', ...new Set(COOKIES_DATA.map(c => c.rarity))];
+
+            // Filter cookies
+            const filteredCookies = useMemo(() => {
+                return COOKIES_DATA.filter(cookie => {
+                    const matchesSearch = cookie.name.toLowerCase().includes(searchTerm.toLowerCase());
+                    const matchesType = selectedType === 'All' || cookie.type === selectedType;
+                    const matchesElement = selectedElement === 'All' ||
+                        (selectedElement === 'None' && cookie.elements.length === 0) ||
+                        cookie.elements.includes(selectedElement);
+                    const matchesRarity = selectedRarity === 'All' || cookie.rarity === selectedRarity;
+                    const matchesOwned = !showOwnedOnly || ownedCookies[cookie.name];
+
+                    return matchesSearch && matchesType && matchesElement && matchesRarity && matchesOwned;
+                });
+            }, [searchTerm, selectedType, selectedElement, selectedRarity, showOwnedOnly, ownedCookies]);
+
+            const toggleOwned = (cookieName, e) => {
+                e.stopPropagation();
+                setOwnedCookies(prev => ({
+                    ...prev,
+                    [cookieName]: !prev[cookieName]
+                }));
+            };
+
+            return (
+                <div className="container">
+                    <header>
+                        <h1>Cookie Run: Kingdom Reference</h1>
+                        <p className="subtitle">Quick reference for cookie elements, stats, and topping builds</p>
+                    </header>
+
+                    <div className="filters">
+                        <div className="filter-group">
+                            <label className="filter-label">Search Cookies</label>
+                            <input
+                                type="text"
+                                className="search-input"
+                                placeholder="Search by name..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                        </div>
+
+                        <div className="filter-row">
+                            <div className="filter-group">
+                                <label className="filter-label">Cookie Type</label>
+                                <div className="filter-chips">
+                                    {types.map(type => (
+                                        <button
+                                            key={type}
+                                            className={`filter-chip ${selectedType === type ? 'active' : ''}`}
+                                            onClick={() => setSelectedType(type)}
+                                        >
+                                            {type}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="filter-group">
+                                <label className="filter-label">Element</label>
+                                <div className="filter-chips">
+                                    {elements.map(element => (
+                                        <button
+                                            key={element}
+                                            className={`filter-chip ${selectedElement === element ? 'active' : ''}`}
+                                            onClick={() => setSelectedElement(element)}
+                                        >
+                                            {element}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="filter-row">
+                            <div className="filter-group">
+                                <label className="filter-label">Rarity</label>
+                                <div className="filter-chips">
+                                    {rarities.map(rarity => (
+                                        <button
+                                            key={rarity}
+                                            className={`filter-chip ${selectedRarity === rarity ? 'active' : ''}`}
+                                            onClick={() => setSelectedRarity(rarity)}
+                                        >
+                                            {rarity}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="filter-group">
+                                <label className="filter-label">View</label>
+                                <div className="filter-chips">
+                                    <button
+                                        className={`filter-chip ${!showOwnedOnly ? 'active' : ''}`}
+                                        onClick={() => setShowOwnedOnly(false)}
+                                    >
+                                        All Cookies
+                                    </button>
+                                    <button
+                                        className={`filter-chip ${showOwnedOnly ? 'active' : ''}`}
+                                        onClick={() => setShowOwnedOnly(true)}
+                                    >
+                                        Owned Only
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="results-count">
+                        Showing {filteredCookies.length} of {COOKIES_DATA.length} cookies
+                    </div>
+
+                    {filteredCookies.length === 0 ? (
+                        <div className="no-results">
+                            No cookies found matching your filters.
+                        </div>
+                    ) : (
+                        <div className="cookie-grid">
+                            {filteredCookies.map(cookie => {
+                                const statInfo = STAT_PRIORITIES[cookie.type];
+                                return (
+                                    <div
+                                        key={cookie.name}
+                                        className={`cookie-card ${ownedCookies[cookie.name] ? 'owned' : ''}`}
+                                    >
+                                        <div className="cookie-header">
+                                            <div className="cookie-image-container">
+                                                <CookieImage cookieName={cookie.name} />
+                                            </div>
+                                            <div className="cookie-info">
+                                                <div className="cookie-name">{cookie.name}</div>
+                                                <div className="cookie-rarity">{cookie.rarity}</div>
+                                            </div>
+                                            <input
+                                                type="checkbox"
+                                                className="owned-checkbox"
+                                                checked={!!ownedCookies[cookie.name]}
+                                                onChange={(e) => toggleOwned(cookie.name, e)}
+                                                title="Mark as owned"
+                                            />
+                                        </div>
+
+                                        <div className="cookie-meta">
+                                            <span className="meta-badge type-badge">{cookie.type}</span>
+                                            {cookie.elements.length === 0 ? (
+                                                <span className="meta-badge element-badge">No Element</span>
+                                            ) : (
+                                                cookie.elements.map(element => (
+                                                    <span key={element} className="meta-badge element-badge">{element}</span>
+                                                ))
+                                            )}
+                                        </div>
+
+                                        <div className="cookie-stats">
+                                            <div className="stats-label">Stat Priority</div>
+                                            <div className="stats-value">{statInfo.stats}</div>
+                                        </div>
+
+                                        <div className="topping-recommendation">
+                                            <div className="topping-label">Topping Build</div>
+                                            <div className="topping-value">{statInfo.toppings}</div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
+
+                    <div className="footer">
+                        <p>Cookie Run: Kingdom Reference Guide • Data updated January 29, 2026</p>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+
+        // Theme toggle functionality
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        const themeBtn = document.getElementById('themeBtn');
+        themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+
+        // Share button functionality
+        document.getElementById('shareBtn').addEventListener('click', async () => {
+            const url = window.location.href;
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Cookie Run: Kingdom Reference Guide',
+                        text: 'Check out this Cookie Run: Kingdom reference for elements, stats, and builds',
+                        url: url
+                    });
+                } catch (err) {
+                    if (err.name !== 'AbortError') {
+                        try {
+                            await navigator.clipboard.writeText(url);
+                            alert('Link copied to clipboard!');
+                        } catch (e) {
+                            console.error('Copy failed:', e);
+                        }
+                    }
+                }
+            } else {
+                try {
+                    await navigator.clipboard.writeText(url);
+                    alert('Link copied to clipboard!');
+                } catch (err) {
+                    console.error('Copy failed:', err);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
