@@ -854,8 +854,6 @@
         // Cookie Type/Position Icons Component
         function CookieIcons({ cookieType }) {
             const [typeIconError, setTypeIconError] = useState(false);
-            const [positionIconError, setPositionIconError] = useState(false);
-            const position = TYPE_POSITIONS[cookieType];
 
             return (
                 <div className="cookie-icons">
@@ -866,15 +864,6 @@
                             className="type-icon"
                             title={cookieType}
                             onError={() => setTypeIconError(true)}
-                        />
-                    )}
-                    {!positionIconError && (
-                        <img
-                            src={`images/${position}.webp`}
-                            alt={position}
-                            className="position-icon"
-                            title={position}
-                            onError={() => setPositionIconError(true)}
                         />
                     )}
                 </div>
@@ -1266,7 +1255,6 @@
                                             <div className="badge-group">
                                                 <span className="badge-group-label">Type:</span>
                                                 <span className="meta-badge type-position-badge">{cookie.type}</span>
-                                                <span className="meta-badge type-position-badge">{TYPE_POSITIONS[cookie.type]}</span>
                                             </div>
                                             <div className="badge-group">
                                                 <span className="badge-group-label">Elements:</span>
