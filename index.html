@@ -431,6 +431,76 @@
         }
 
         /* Footer */
+        .section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--color-cream);
+            border: 1px solid var(--color-border);
+        }
+
+        [data-theme="dark"] .section {
+            background: #1f1d1b;
+        }
+
+        .section h2 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--color-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        [data-theme="dark"] .section h2 {
+            color: var(--color-cream);
+        }
+
+        .section h3 {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--color-navy);
+        }
+
+        [data-theme="dark"] .section h3 {
+            color: var(--color-cream);
+        }
+
+        [data-theme="dark"] .section > div > div {
+            background: #252320 !important;
+        }
+
+        .synergy-cookie-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem;
+            background: var(--color-cream);
+            border: 1px solid var(--color-border);
+        }
+
+        [data-theme="dark"] .synergy-cookie-item {
+            background: #1f1d1b;
+            border-color: #3a3734;
+        }
+
+        .synergy-cookie-item .cookie-image-container {
+            width: 50px;
+            height: 50px;
+            flex-shrink: 0;
+            background: var(--color-cream);
+            border: 2px solid var(--color-border);
+        }
+
+        [data-theme="dark"] .synergy-cookie-item .cookie-image-container {
+            background: #252320;
+            border-color: #3a3734;
+        }
+
+        .synergy-cookie-name {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--color-navy);
+            margin-bottom: 0.25rem;
+        }
+
         .footer {
             text-align: center;
             margin-top: 4rem;
@@ -508,7 +578,6 @@
             { name: "Candy Apple Cookie", rarity: "Epic", type: "Bomber", elements: [] },
             { name: "Candy Diver Cookie", rarity: "Epic", type: "Support", elements: [] },
             { name: "Captain Caviar Cookie", rarity: "Epic", type: "Bomber", elements: ["Water"] },
-            { name: "Capsaicin Cookie", rarity: "Epic", type: "Charge", elements: ["Fire"] },
             { name: "Caramel Arrow Cookie", rarity: "Epic", type: "Ranged", elements: ["Darkness"] },
             { name: "Caramel Choux Cookie", rarity: "Epic", type: "Support", elements: [] },
             { name: "Carol Cookie", rarity: "Epic", type: "Healing", elements: ["Grass"] },
@@ -517,14 +586,13 @@
             { name: "Chess Choco Cookie", rarity: "Epic", type: "Bomber", elements: ["Chaos"] },
             { name: "Chili Pepper Cookie", rarity: "Epic", type: "Ambush", elements: ["Fire"] },
             { name: "Choco Drizzle Cookie", rarity: "Epic", type: "Ambush", elements: ["Darkness"] },
-            { name: "Clotted Cream Cookie", rarity: "Epic", type: "Magic", elements: ["Light"] },
             { name: "Cloud Haetae Cookie", rarity: "Epic", type: "Defense", elements: [] },
             { name: "Cocoa Cookie", rarity: "Epic", type: "Defense", elements: [] },
             { name: "Cotton Cookie", rarity: "Epic", type: "Support", elements: ["Grass"] },
             { name: "Cream Puff Cookie", rarity: "Epic", type: "Support", elements: ["Light"] },
             { name: "Cream Soda Cookie", rarity: "Epic", type: "Charge", elements: ["Water"] },
             { name: "Cream Unicorn Cookie", rarity: "Epic", type: "Healing", elements: ["Fire"] },
-            { name: "Crème Brûlée Cookie", rarity: "Epic", type: "Ranged", elements: [] },
+            { name: "Crème Brûlée Cookie", rarity: "Epic", type: "Ranged", elements: ["Light"] },
             { name: "Crunchy Chip Cookie", rarity: "Epic", type: "Charge", elements: ["Darkness"] },
             { name: "Dark Choco Cookie", rarity: "Epic", type: "Charge", elements: ["Darkness"] },
             { name: "Eclair Cookie", rarity: "Epic", type: "Support", elements: [] },
@@ -589,7 +657,6 @@
             { name: "Salt Cellar Cookie", rarity: "Epic", type: "Defense", elements: ["Steel"] },
             { name: "Schwarzwälder", rarity: "Epic", type: "Charge", elements: ["Steel", "Chaos"] },
             { name: "Seltzer Cookie", rarity: "Epic", type: "Support", elements: ["Water"] },
-            { name: "Shining Glitter Cookie", rarity: "Epic", type: "Magic", elements: ["Electricity"] },
             { name: "Silverbell Cookie", rarity: "Epic", type: "Support", elements: ["Grass"] },
             { name: "Smoked Cheese Cookie", rarity: "Epic", type: "Magic", elements: ["Earth"] },
             { name: "Snow Sugar Cookie", rarity: "Epic", type: "Magic", elements: ["Ice"] },
@@ -612,7 +679,7 @@
 
             // Super Epic Cookies
             { name: "Doughael", rarity: "Super Epic", type: "Healing", elements: [] },
-            { name: "Camellia Cookie", rarity: "Super Epic", type: "Charge", elements: [] },
+            { name: "Camellia Cookie", rarity: "Super Epic", type: "Charge", elements: ["Grass"] },
             { name: "Elder Faerie Cookie", rarity: "Super Epic", type: "Defense", elements: ["Steel"] },
             { name: "Crimson Coral Cookie", rarity: "Super Epic", type: "Defense", elements: ["Water"] },
             { name: "Shining Glitter Cookie", rarity: "Super Epic", type: "Magic", elements: ["Electricity"] },
@@ -646,7 +713,7 @@
             // Awakened Ancient Cookies
             { name: "Dark Cacao Cookie (Dragon Lord)", rarity: "Awakened Ancient", type: "Charge", elements: ["Darkness", "Electricity"] },
             { name: "Golden Cheese Cookie (Immortal)", rarity: "Awakened Ancient", type: "Ranged", elements: ["Earth"] },
-            { name: "Pure Vanilla Cookie (Compassionate)", rarity: "Awakened Ancient", type: "Healing", elements: [] },
+            { name: "Pure Vanilla Cookie (Compassionate)", rarity: "Awakened Ancient", type: "Healing", elements: ["Light"] },
             { name: "Hollyberry Cookie (Aegis)", rarity: "Awakened Ancient", type: "Defense", elements: ["Steel"] },
             { name: "White Lily Cookie (Dawnbringer)", rarity: "Awakened Ancient", type: "Bomber", elements: ["Grass"] },
 
@@ -690,10 +757,22 @@
             const getImageFileName = (name) => {
                 // Handle special cases first
                 if (name === "Dark Enchantress Cookie") {
-                    return "Dark-enchantress-cookie.webp";
+                    return "Dark_enchantress_illustration.webp";
                 }
                 if (name === "Millennial Tree Cookie") {
-                    return "Millennial-tree-cookie.webp";
+                    return "Millennial_illustration.webp";
+                }
+                if (name === "Kouign-Amann Cookie") {
+                    return "Kouign_amann_illustration.webp";
+                }
+                if (name === "Pudding à la Mode Cookie") {
+                    return "Pudding_a_la_mode_illustration.webp";
+                }
+                if (name === "Schwarzwälder") {
+                    return "Schwarzwalder_illustration.webp";
+                }
+                if (name === "Crème Brûlée Cookie") {
+                    return "Creme_brulee_illustration.webp";
                 }
 
                 // Handle Awakened Ancient cookies
@@ -716,9 +795,11 @@
                 // Standard format: First_word_second_word_illustration.webp
                 // Remove " Cookie" from the end and convert
                 let baseName = name.replace(" Cookie", "");
-                // Replace spaces with underscores and capitalize each word
+                // Replace spaces with underscores - only capitalize first word
                 baseName = baseName.split(' ')
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                    .map((word, index) => index === 0
+                        ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+                        : word.toLowerCase())
                     .join('_');
 
                 return `${baseName}_illustration.webp`;
@@ -788,6 +869,9 @@
             const [selectedElement, setSelectedElement] = useState('All');
             const [selectedRarity, setSelectedRarity] = useState('All');
             const [showOwnedOnly, setShowOwnedOnly] = useState(false);
+            const [sortBy, setSortBy] = useState('name');
+            const [showElementChart, setShowElementChart] = useState(false);
+            const [showSynergies, setShowSynergies] = useState(false);
             const [ownedCookies, setOwnedCookies] = useState(() => {
                 const saved = localStorage.getItem('ownedCookies');
                 return saved ? JSON.parse(saved) : {};
@@ -803,9 +887,9 @@
             const elements = ['All', 'None', ...new Set(COOKIES_DATA.flatMap(c => c.elements))].sort();
             const rarities = ['All', ...new Set(COOKIES_DATA.map(c => c.rarity))];
 
-            // Filter cookies
+            // Filter and sort cookies
             const filteredCookies = useMemo(() => {
-                return COOKIES_DATA.filter(cookie => {
+                const filtered = COOKIES_DATA.filter(cookie => {
                     const matchesSearch = cookie.name.toLowerCase().includes(searchTerm.toLowerCase());
                     const matchesType = selectedType === 'All' || cookie.type === selectedType;
                     const matchesElement = selectedElement === 'All' ||
@@ -816,7 +900,20 @@
 
                     return matchesSearch && matchesType && matchesElement && matchesRarity && matchesOwned;
                 });
-            }, [searchTerm, selectedType, selectedElement, selectedRarity, showOwnedOnly, ownedCookies]);
+
+                // Sort filtered results
+                const rarityOrder = { 'Beast': 0, 'Awakened Ancient': 1, 'Ancient': 2, 'Legendary': 3, 'Dragon': 4, 'Super Epic': 5, 'Epic': 6, 'Rare': 7, 'Common': 8 };
+                return filtered.sort((a, b) => {
+                    if (sortBy === 'name') {
+                        return a.name.localeCompare(b.name);
+                    } else if (sortBy === 'rarity') {
+                        return rarityOrder[a.rarity] - rarityOrder[b.rarity];
+                    } else if (sortBy === 'type') {
+                        return a.type.localeCompare(b.type);
+                    }
+                    return 0;
+                });
+            }, [searchTerm, selectedType, selectedElement, selectedRarity, showOwnedOnly, ownedCookies, sortBy]);
 
             const toggleOwned = (cookieName, e) => {
                 e.stopPropagation();
@@ -825,6 +922,103 @@
                     [cookieName]: !prev[cookieName]
                 }));
             };
+
+            const clearFilters = () => {
+                setSearchTerm('');
+                setSelectedType('All');
+                setSelectedElement('All');
+                setSelectedRarity('All');
+                setShowOwnedOnly(false);
+            };
+
+            // Calculate element distribution
+            const elementDistribution = useMemo(() => {
+                const dist = {};
+                COOKIES_DATA.forEach(cookie => {
+                    if (cookie.elements.length === 0) {
+                        dist['None'] = (dist['None'] || 0) + 1;
+                    } else {
+                        cookie.elements.forEach(element => {
+                            dist[element] = (dist[element] || 0) + 1;
+                        });
+                    }
+                });
+                return Object.entries(dist).sort((a, b) => b[1] - a[1]);
+            }, []);
+
+            // Beascuit type mapping by cookie class
+            const BEASCUIT_TYPES = {
+                'Ambush': 'Crispy Beascuit',
+                'Bomber': 'Spicy Beascuit',
+                'Charge': 'Chewy Beascuit',
+                'Defense': 'Hard Beascuit',
+                'Healing': 'Sweet Beascuit',
+                'Magic': 'Zesty Beascuit',
+                'Ranged': 'Light Beascuit',
+                'Support': 'Hearty Beascuit'
+            };
+
+            // Elemental prefix mapping
+            const ELEMENT_PREFIXES = {
+                'Fire': 'Burning',
+                'Water': 'Watery',
+                'Grass': 'Grassy',
+                'Earth': 'Earthy',
+                'Wind': 'Windy',
+                'Ice': 'Frozen',
+                'Electricity': 'Thunderous',
+                'Light': 'Radiant',
+                'Darkness': 'Dark',
+                'Poison': 'Poisonous',
+                'Steel': 'Steely',
+                'Chaos': 'Tainted'
+            };
+
+            // Get beascuit recommendation for a cookie
+            const getBeascuitRecommendation = (cookieType, elements) => {
+                const baseBeascuit = BEASCUIT_TYPES[cookieType];
+                if (elements.length === 0) {
+                    return baseBeascuit;
+                }
+                // Recommend elemental variant for primary element
+                const primaryElement = elements[0];
+                const prefix = ELEMENT_PREFIXES[primaryElement];
+                return `${prefix} ${baseBeascuit}`;
+            };
+
+            // Team synergy recommendations
+            const SYNERGY_TEAMS = [
+                {
+                    name: 'Water Domination',
+                    cookies: ['Sea Fairy Cookie', 'Black Pearl Cookie', 'Captain Caviar Cookie', 'Frilled Jellyfish Cookie', 'Sorbet Shark Cookie'],
+                    description: 'High water synergy with massive burst damage'
+                },
+                {
+                    name: 'Fire Power',
+                    cookies: ['Fire Spirit Cookie', 'Burning Spice Cookie', 'Capsaicin Cookie', 'Pitaya Dragon Cookie', 'Rye Cookie'],
+                    description: 'Massive fire damage output with strong frontline'
+                },
+                {
+                    name: 'Earth Fortress',
+                    cookies: ['Golden Cheese Cookie', 'Burnt Cheese Cookie', 'Smoked Cheese Cookie', 'Espresso Cookie', 'Mozzarella Cookie'],
+                    description: 'Excellent for Cookie Alliance with strong earth synergy'
+                },
+                {
+                    name: 'Electric Storm',
+                    cookies: ['Stormbringer Cookie', 'Dark Cacao Cookie', 'Twizzly Gummy Cookie', 'Blueberry Pie Cookie', 'Shining Glitter Cookie'],
+                    description: 'Lightning fast attacks with high electricity damage'
+                },
+                {
+                    name: 'Beast Mode',
+                    cookies: ['Burning Spice Cookie', 'Shadow Milk Cookie', 'Mystic Flour Cookie', 'Eternal Sugar Cookie', 'Silent Salt Cookie'],
+                    description: 'Ultimate endgame team with Beast cookies'
+                },
+                {
+                    name: 'Ancients United',
+                    cookies: ['Pure Vanilla Cookie', 'Hollyberry Cookie', 'Dark Cacao Cookie', 'Golden Cheese Cookie', 'White Lily Cookie'],
+                    description: 'Balanced Ancient team for most content'
+                }
+            ];
 
             return (
                 <div className="container">
@@ -911,7 +1105,107 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div className="filter-row">
+                            <div className="filter-group">
+                                <label className="filter-label">Sort By</label>
+                                <div className="filter-chips">
+                                    <button
+                                        className={`filter-chip ${sortBy === 'name' ? 'active' : ''}`}
+                                        onClick={() => setSortBy('name')}
+                                    >
+                                        Name
+                                    </button>
+                                    <button
+                                        className={`filter-chip ${sortBy === 'rarity' ? 'active' : ''}`}
+                                        onClick={() => setSortBy('rarity')}
+                                    >
+                                        Rarity
+                                    </button>
+                                    <button
+                                        className={`filter-chip ${sortBy === 'type' ? 'active' : ''}`}
+                                        onClick={() => setSortBy('type')}
+                                    >
+                                        Type
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="filter-group">
+                                <label className="filter-label">Actions</label>
+                                <div className="filter-chips">
+                                    <button className="filter-chip" onClick={clearFilters}>
+                                        Clear Filters
+                                    </button>
+                                    <button
+                                        className="filter-chip"
+                                        onClick={() => setShowElementChart(!showElementChart)}
+                                    >
+                                        {showElementChart ? 'Hide' : 'Show'} Element Chart
+                                    </button>
+                                    <button
+                                        className="filter-chip"
+                                        onClick={() => setShowSynergies(!showSynergies)}
+                                    >
+                                        {showSynergies ? 'Hide' : 'Show'} Team Synergies
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    {showElementChart && (
+                        <div className="section">
+                            <h2>Element Distribution</h2>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem', marginTop: '1rem' }}>
+                                {elementDistribution.map(([element, count]) => (
+                                    <div key={element} style={{ background: 'white', padding: '1rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)' }}>
+                                        <div style={{ fontWeight: '600', color: 'var(--color-navy)', marginBottom: '0.5rem' }}>{element}</div>
+                                        <div style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--color-amber)' }}>{count}</div>
+                                        <div style={{ fontSize: '0.875rem', color: 'var(--color-slate)' }}>
+                                            {((count / COOKIES_DATA.length) * 100).toFixed(1)}%
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {showSynergies && (
+                        <div className="section">
+                            <h2>Recommended Team Synergies</h2>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1rem', marginTop: '1rem' }}>
+                                {SYNERGY_TEAMS.map(team => (
+                                    <div key={team.name} style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)' }}>
+                                        <h3 style={{ color: 'var(--color-navy)', marginBottom: '0.5rem' }}>{team.name}</h3>
+                                        <p style={{ fontSize: '0.875rem', color: 'var(--color-slate)', marginBottom: '1rem' }}>{team.description}</p>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                            {team.cookies.map((cookieName, i) => {
+                                                const cookieData = COOKIES_DATA.find(c => c.name === cookieName);
+                                                return (
+                                                    <div key={i} className="synergy-cookie-item">
+                                                        <div className="cookie-image-container">
+                                                            <CookieImage cookieName={cookieName} />
+                                                        </div>
+                                                        <div style={{ flex: 1, minWidth: 0 }}>
+                                                            <div className="synergy-cookie-name">
+                                                                {cookieName}
+                                                            </div>
+                                                            {cookieData && (
+                                                                <div style={{ display: 'flex', gap: '0.25rem', alignItems: 'center' }}>
+                                                                    <CookieIcons cookieType={cookieData.type} />
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
 
                     <div className="results-count">
                         Showing {filteredCookies.length} of {COOKIES_DATA.length} cookies
@@ -976,6 +1270,13 @@
                                         <div className="topping-recommendation">
                                             <div className="topping-label">Topping Build</div>
                                             <div className="topping-value">{statInfo.toppings}</div>
+                                        </div>
+
+                                        <div className="topping-recommendation">
+                                            <div className="topping-label">Recommended Beascuit</div>
+                                            <div className="topping-value">
+                                                {getBeascuitRecommendation(cookie.type, cookie.elements)}
+                                            </div>
                                         </div>
                                     </div>
                                 );
