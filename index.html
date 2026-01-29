@@ -229,7 +229,6 @@
             width: 100px;
             height: 100px;
             flex-shrink: 0;
-            position: relative;
             background: var(--color-cream);
             border: 2px solid var(--color-border);
         }
@@ -254,14 +253,20 @@
             background: linear-gradient(135deg, var(--color-amber) 0%, var(--color-sage) 100%);
         }
 
-        .cookie-icons {
-            position: absolute;
-            bottom: 2px;
-            left: 2px;
-            right: 2px;
+        .cookie-info {
+            flex: 1;
+        }
+
+        .cookie-rarity-row {
             display: flex;
-            gap: 2px;
-            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cookie-icons {
+            display: flex;
+            gap: 4px;
+            align-items: center;
         }
 
         .type-icon,
@@ -269,12 +274,13 @@
             width: 24px;
             height: 24px;
             object-fit: contain;
-            background: rgba(255, 255, 255, 0.95);
+            background: white;
             border: 1px solid var(--color-border);
         }
 
-        .cookie-info {
-            flex: 1;
+        [data-theme="dark"] .type-icon,
+        [data-theme="dark"] .position-icon {
+            background: #1a1917;
         }
 
         .cookie-name {
@@ -639,10 +645,8 @@
         };
 
         // Cookie Image Component with fallback
-        function CookieImage({ cookieName, cookieType }) {
+        function CookieImage({ cookieName }) {
             const [imageError, setImageError] = useState(false);
-            const [typeIconError, setTypeIconError] = useState(false);
-            const [positionIconError, setPositionIconError] = useState(false);
 
             // Convert cookie name to filename format matching downloaded files
             const getImageFileName = (name) => {
@@ -692,43 +696,51 @@
                 return words.slice(0, 2).map(w => w[0]).join('').toUpperCase();
             };
 
+            if (imageError) {
+                return (
+                    <div className="cookie-image-placeholder">
+                        {getInitials(cookieName)}
+                    </div>
+                );
+            }
+
+            return (
+                <img
+                    src={imagePath}
+                    alt={cookieName}
+                    className="cookie-image"
+                    onError={() => setImageError(true)}
+                />
+            );
+        }
+
+        // Cookie Type/Position Icons Component
+        function CookieIcons({ cookieType }) {
+            const [typeIconError, setTypeIconError] = useState(false);
+            const [positionIconError, setPositionIconError] = useState(false);
             const position = TYPE_POSITIONS[cookieType];
 
             return (
-                <>
-                    {imageError ? (
-                        <div className="cookie-image-placeholder">
-                            {getInitials(cookieName)}
-                        </div>
-                    ) : (
+                <div className="cookie-icons">
+                    {!typeIconError && (
                         <img
-                            src={imagePath}
-                            alt={cookieName}
-                            className="cookie-image"
-                            onError={() => setImageError(true)}
+                            src={`images/${cookieType}.webp`}
+                            alt={cookieType}
+                            className="type-icon"
+                            title={cookieType}
+                            onError={() => setTypeIconError(true)}
                         />
                     )}
-                    <div className="cookie-icons">
-                        {!typeIconError && (
-                            <img
-                                src={`images/${cookieType}.webp`}
-                                alt={cookieType}
-                                className="type-icon"
-                                title={cookieType}
-                                onError={() => setTypeIconError(true)}
-                            />
-                        )}
-                        {!positionIconError && (
-                            <img
-                                src={`images/${position}.webp`}
-                                alt={position}
-                                className="position-icon"
-                                title={position}
-                                onError={() => setPositionIconError(true)}
-                            />
-                        )}
-                    </div>
-                </>
+                    {!positionIconError && (
+                        <img
+                            src={`images/${position}.webp`}
+                            alt={position}
+                            className="position-icon"
+                            title={position}
+                            onError={() => setPositionIconError(true)}
+                        />
+                    )}
+                </div>
             );
         }
 
@@ -882,11 +894,14 @@
                                     >
                                         <div className="cookie-header">
                                             <div className="cookie-image-container">
-                                                <CookieImage cookieName={cookie.name} cookieType={cookie.type} />
+                                                <CookieImage cookieName={cookie.name} />
                                             </div>
                                             <div className="cookie-info">
                                                 <div className="cookie-name">{cookie.name}</div>
-                                                <div className="cookie-rarity">{cookie.rarity}</div>
+                                                <div className="cookie-rarity-row">
+                                                    <div className="cookie-rarity">{cookie.rarity}</div>
+                                                    <CookieIcons cookieType={cookie.type} />
+                                                </div>
                                             </div>
                                             <input
                                                 type="checkbox"
